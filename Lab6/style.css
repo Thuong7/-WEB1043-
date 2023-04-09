@@ -1,0 +1,17 @@
+.slideshow-container {
+    position:relative;
+  }
+  
+  .mySlides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: 1s ease;
+ 
+  }
+  
+  .mySlides.active {
+    opacity: 1;
+    
+  }
