@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body {
+  background-color: #f2f2f2;
+}
+#draglist li {
+  cursor: move;
+}
+.wrapper{
+    display: flex;
+}
+#dropzone{
+  display: flex;
+  flex-direction: column;
+}
+#dropzone {
+  border: 2px dashed black;
+  padding: 20px;
+  margin-top: 20px;
+  height: 100px;
+  text-align: center;
+}
+#draglist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  border: 1px solid #ccc;
+}
+#draglist li {
+  background-color:gray;
+  color: #000;
+  padding: 12px;
+  margin: 4px;
+  border-radius: 4px;
+  border: 1px solid white;
+}
+#dropzone {
+  width: 200px;
+  height: 100%;
+  border: 2px dashed #ccc;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 4px;
+}
+    </style>
+</head>
+<body>
+ <div class="wrapper">
+    <div id="dropzone">
+        Thả các phần tử vào đây
+      </div>
+      <ul id="draglist">
+        <li draggable="true">Phần tử 1</li>
+        <li draggable="true">Phần tử 2</li>
+        <li draggable="true">Phần tử 3</li>
+      </ul>
+ </div>
+  
+    <script>
+      const dropzone = document.getElementById('dropzone');
+      const draglist = document.getElementById('draglist');
+  
+      draglist.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData('text/plain', event.target.textContent);
+      });
+  
+      dropzone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropzone.style.backgroundColor = 'gray';
+      });
+  
+      // Chỉ cho phép thả các phần tử vào ô dropzone
+      dropzone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const data = event.dataTransfer.getData('text/plain');
+        const newElement = document.createElement('p');
+        newElement.textContent = data;
+        dropzone.appendChild(newElement);
+      });
+  
+      dropzone.addEventListener('dragleave', (event) => {
+        dropzone.style.backgroundColor = '';
+      });
+    </script>
+  </body>
+
+</html>
